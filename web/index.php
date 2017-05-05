@@ -29,8 +29,7 @@ if (!(getenv('API_KEY') && getenv('API_SECRET'))) {
 
 // Instantiate a Slim app
 $app = new Slim(array(
-    'log.enabled' => true,
-    'templates.path' => '/../templates'
+    'log.enabled' => true
 ));
 
 // Return an info page for the root path
@@ -94,8 +93,7 @@ $app->post('/start/:sessionId', 'cors', function ($sessionId) use ($app) {
     $archive = $app->opentok->startArchive($sessionId, 'Getting Started Sample Archive');
     $app->response->headers->set('Content-Type', 'application/json');
 
-    $responseData = array('archive' => $archive);
-    echo json_encode($responseData);
+    echo json_encode($archive);
 });
 
 // Stop Archiving and return the Archive ID
@@ -103,8 +101,7 @@ $app->post('/stop/:archiveId', 'cors', function ($archiveId) use ($app) {
     $archive = $app->opentok->stopArchive($archiveId);
     $app->response->headers->set('Content-Type', 'application/json');
 
-    $responseData = array('archive' => $archive);
-    echo json_encode($responseData);
+    echo json_encode($archive);
 });
 
 
