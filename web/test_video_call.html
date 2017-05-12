@@ -1,0 +1,41 @@
+<html>
+
+<body>
+    <p id="mic">MIC?</p>
+    <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
+    <script charset="utf-8">
+        var apiKey = "45839292";
+        var sessionId = "2_MX40NTgzOTI5Mn5-MTQ5NDM5NzI1NzY1N35LWlZLSmVLdEdRUDQzVmkxajlkdk5YL3N-fg";
+        var token = "T1==cGFydG5lcl9pZD00NTgzOTI5MiZzaWc9YWYzZGIyMTRkMjgzMWZjNDI4ZWI0OWRlNDI4MGE4MzE0MTVhZWRhNzpzZXNzaW9uX2lkPTJfTVg0ME5UZ3pPVEk1TW41LU1UUTVORE01TnpJMU56WTFOMzVMV2xaTFNtVkxkRWRSVURRelZta3hhamxrZGs1WUwzTi1mZyZjcmVhdGVfdGltZT0xNDk0NDg2MzM2Jm5vbmNlPTAuOTk1MDEyNDk3Nzk4Nzk2NiZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNDk1MDkxMTM1";
+        var session = OT.initSession(apiKey, sessionId)
+            .on('streamCreated', function (event) {
+                session.subscribe(event.stream, 'subscriber', {
+                    insertMode: 'append',
+                    width: '100%',
+                    height: '50%',
+                });
+            })
+            .connect(token, function (error) {
+                var publisher = OT.initPublisher('publisher', {
+                    insertMode: 'append',
+                    width: '100%',
+                    height: '50%',
+                    audioSource: "default"
+                });
+                session.publish(publisher);
+
+            });
+    </script>
+
+    <div id="videos">
+        <div id="subscriber"></div>
+        <div id="publisher"></div>
+    </div>
+</body>
+<style>
+    body {
+        font-family: Muli, Arial;
+    }
+</style>
+
+</html>
