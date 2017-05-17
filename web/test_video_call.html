@@ -25,6 +25,43 @@
                 session.publish(publisher);
 
             });
+
+        function err_function(error) {
+            if (error) {
+                console.log("signal error ("
+                    + error.name
+                    + "): " + error.message);
+            } else {
+                console.log("signal sent.");
+            }
+        }
+
+        document.addEventListener("keydown", function (event) {
+
+            switch (event.keyCode) {
+                case 37: //left
+                    console.log("left");
+                    session.signal({ data: "left", type:"cmd" }, err_function);
+                    break;
+                case 38: //up
+                    console.log("up");
+                    session.signal({ data: "up", type:"cmd" }, err_function);
+                    break;
+                case 39: //right
+                    console.log("right");
+                    session.signal({ data: "right", type:"cmd" }, err_function);
+                    break;
+                case 40: //down
+                    console.log("down");
+                    session.signal({ data: "down", type:"cmd" }, err_function);
+                    break;
+                case 32: //down
+                    console.log("stop");
+                    session.signal({ data: "stop", type:"cmd" }, err_function);
+                    break;
+            }
+            
+        });
     </script>
 
     <div id="videos">
@@ -36,28 +73,31 @@
     body {
         font-family: Muli, Arial;
     }
+    
     #videos {
         width: '100%';
         height: '100%';
         position: relative;
     }
+    
     #publisher {
         width: 128px;
         height: 96px;
         position: absolute;
         top: 350px;
         left: 450px;
-        z-index: 2;   
+        border: 3px white;
+        z-index: 2;
     }
+    
     #subscriber {
         width: 640px;
         height: 480px;
         position: absolute;
         top: 0px;
-        left: 0px;     
-        z-index: 1;   
+        left: 0px;
+        z-index: 1;
     }
-
 </style>
 
 </html>
