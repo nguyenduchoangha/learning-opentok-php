@@ -16,7 +16,7 @@
                 });
             })
             .connect(token, function (error) {
-                var publisher = OT.initPublisher('publisherzzz', {
+                var publisher = OT.initPublisher('publisher', {
                     insertMode: 'append',
                     width: '100%',
                     height: '100%',
@@ -36,38 +36,15 @@
             }
         }
 
-        document.addEventListener("keydown", function (event) {
-
-            switch (event.keyCode) {
-                case 37: //left
-                    console.log("left");
-                    session.signal({ data: "left", type:"cmd" }, err_function);
-                    break;
-                case 38: //up
-                    console.log("up");
-                    session.signal({ data: "up", type:"cmd" }, err_function);
-                    break;
-                case 39: //right
-                    console.log("right");
-                    session.signal({ data: "right", type:"cmd" }, err_function);
-                    break;
-                case 40: //down
-                    console.log("down");
-                    session.signal({ data: "down", type:"cmd" }, err_function);
-                    break;
-                case 32: //down
-                    console.log("stop");
-                    session.signal({ data: "stop", type:"cmd" }, err_function);
-                    break;
-            }
-            
+        document.addEventListener("keypress", function (event) {
+            console.log(event.key)
+            session.signal({ data: event.key, type:"key" }, err_function);
         });
     </script>
 
     <div id="videos">
         <div id="subscriber"></div>
         <div id="publisher"></div>
-        <div id="publisherzzz"></div>
     </div>
 </body>
 <style>
